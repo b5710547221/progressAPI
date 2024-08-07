@@ -30,7 +30,7 @@ const options = {
 };
 
 const specs = swaggerJsdoc(options);
-var users = require('./routes/users');
+var users = require('./routes/entity');
 var cors = require('cors')
 const morgan = require('morgan')
 var app = express();

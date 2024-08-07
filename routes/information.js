@@ -4,7 +4,7 @@ const controller = require('../controllers/UserController')
 const db = require('../config/db');
 module.exports = router
 
-router.get('/entity/:entityId/:type', async(req ,res)=>{
+router.get('/information/:entityId/:type', async(req ,res)=>{
     const entityId = req.params.entityId
     const type = req.params.type
     const hash_key = `${entityId}:${type}`
@@ -12,14 +12,11 @@ router.get('/entity/:entityId/:type', async(req ,res)=>{
 
 
 });
-router.post('/entity/:entityId', async(req ,res)=>{
+router.post('/information/:entityId', async(req ,res)=>{
     const data = req.body
     const entityId = `${data.entityId}:${data.type}`
     entityId = data
     return res.status(200).statusMessage("ok")
 
 });
-router.get('/entity/:entityId/:userId', async(req ,res)=>{
-    
 
-});
