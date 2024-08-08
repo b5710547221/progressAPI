@@ -6,7 +6,7 @@ const TABLE_NAME = 'Q_Timeslot_Time_Level'
 const TABLE_Register = 'Q_Register'
 module.exports = router
 
-router.get('/register/:userId/?entityId=:entityId',async(req,res)=>{
+router.get('/register/:userId?entityId=:entityId',async(req,res)=>{
   
     
 });
