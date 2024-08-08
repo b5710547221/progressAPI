@@ -8,15 +8,15 @@ router.get('/information/:entityId/:type', async(req ,res)=>{
     const entityId = req.params.entityId
     const type = req.params.type
     const hash_key = `${entityId}:${type}`
-    return  hash_key
+    return  entityId,type
 
 
 });
-router.post('/information/:entityId', async(req ,res)=>{
-    const data = req.body
-    const entityId = `${data.entityId}:${data.type}`
-    entityId = data
-    return res.status(200).statusMessage("ok")
+router.post('/information', async(req ,res)=>{
+    const entityId = req.params.entityId
+    const type = req.params.type
+    
+    return entityId,type,res.status(200).statusMessage("ok")
 
 });
 

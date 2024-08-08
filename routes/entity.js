@@ -3,7 +3,7 @@ const router = express.Router()
 const controller = require('../controllers/UserController')
 const db = require('../config/db');
 module.exports = router
-router.get('/entity/:type', async(req ,res)=>{
+router.get('/entity?type=:type', async(req ,res)=>{
     var type =  req.params.type
     var data;
     try {
@@ -31,17 +31,21 @@ router.get('/entity/:type', async(req ,res)=>{
 router.get('/entity/:entityId',async(req,res)=>{
       const entityId =  req.params.entityId
       data.entityId = entityId
-      return data.entityId
+      return data
       
 });
-router.put('/entity/:entityId', async(req ,res)=>{
-      const data =  JSON.parse(req.body);
-      data.entityId = data
+router.post('/entity',async(req,res)=>{
+    const entityId = "1234"
+    data.entityId = entityId
+    return res.status(200),data.entityId
+    
+});
+router.put('/entity', async(req ,res)=>{
+      const data =  req.body
 
-      return   res.status(200),
-               res.body = JSON.stringify({
-               data
-               })
+      
+
+   
       
 
 });
