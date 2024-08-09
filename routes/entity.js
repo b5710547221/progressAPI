@@ -51,7 +51,7 @@ router.post('/entity',async(req,res)=>{
         res.status(500).send("ระบบมีปัญหา")
       }
    
-    return res.status(200),data.entityId
+    return res.status(200),data.entityId,"ระบบใช้ได้"
     
 });
 router.put('/entity', async(req ,res)=>{
