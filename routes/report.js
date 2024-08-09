@@ -4,8 +4,14 @@ const db = require('../config/db');
 module.exports = router
 
 router.post('/report/reserved',async(req,res)=>{
-   const entityId = req.body.entityId
-   const date = req.body.date
+    try{
+        const entityId = req.body.entityId
+        const date = req.body.date
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
+   
    return res.status(200)
     
 });

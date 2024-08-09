@@ -8,32 +8,56 @@ router.get('/timeslots/:entityId',async(req,res)=>{
 });
 
 router.get('/timeslots?date=:date',async(req,res)=>{
+    try{
+   
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
     return res.status(200)
       
   });
 
  
 router.get('/timeslots/:entityId/:date',async(req,res)=>{
-    const entityId = req.params.entityId
-    const date = req.params.date
+    try{
+        const entityId = req.params.entityId
+        const date = req.params.date
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
+   
     return res.status(200)
       
   });
  
 router.post('/timeslots',async(req,res)=>{
-    const entityId = req.body.entityId
-    const dateList = req.body.date
-    const timeslot = req.body.timeslot
+    try{
+        const entityId = req.body.entityId
+        const dateList = req.body.date
+        const timeslot = req.body.timeslot
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
+   
     return res.status(200)
       
   });
 
 router.put('/timeslots',async(req,res)=>{
-    const entityId = req.body.entityId
-    const date = req.body.date
-    const time = req.body.timeslot
-    const action = req.body.action
-    const value = req.body.value
+    try{
+        const entityId = req.body.entityId
+        const date = req.body.date
+        const time = req.body.timeslot
+        const action = req.body.action
+        const value = req.body.value
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
+   
     return res.status(200)
       
   });

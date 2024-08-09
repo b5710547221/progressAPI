@@ -22,21 +22,35 @@ router.get('/entity?type=:type', async(req ,res)=>{
         //console.log(result)
       } catch (err) {
         console.error(err);
-        res.status(500).send('Internal Server Error');
+        res.status(500).send("ระบบมีปัญหา")
       }
       //console.log(result.rows)
     return data;
 
 });
 router.get('/entity/:entityId',async(req,res)=>{
-      const entityId =  req.params.entityId
-      data.entityId = entityId
+      try{
+        const entityId =  req.params.entityId
+        data.entityId = entityId
+
+      }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+      }
+     
       return data
       
 });
 router.post('/entity',async(req,res)=>{
-    const entityId = "1234"
-    data.entityId = entityId
+    try{
+        const entityId = "1234"
+        data.entityId = entityId
+
+      }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+      }
+   
     return res.status(200),data.entityId
     
 });
