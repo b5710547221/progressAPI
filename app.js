@@ -67,7 +67,6 @@ app.get('/entity/?type=:type', async(req ,res)=>{
         }
         else{
             const result = await db.query('SELECT * FROM "Q_Entity"');
-            data = result.rows;
             res.json(result.rows); 
         }
         //console.log(result)
@@ -79,21 +78,23 @@ app.get('/entity/?type=:type', async(req ,res)=>{
     //return data;
 
 });
-app.get('/entity/:entityId',async(req,res)=>{
+app.get('/entity/:entityId',cors(),async(req,res)=>{
   //var data = await db.query('SELECT id FROM "Q_Entity"'); 
   //console.log(data.rows.id)
   //res.json(data.rows);  
-    
-    var result = null
+      var entityId = req.params.entityId;
+
+     
+   // var result = null
     try{
-       if(result == null){
-            result = req.params.entityId
-            const result1 = await db.query('SELECT id FROM "Q_Entity" WHERE id = result');
-            console.log(result1.rows)
-            res.json(result1.rows)
-        }else{
-            res.send("ไม่มีข้อมูล")
-        }
+            let res1;
+            var result = req.params.entityId
+            res1 = await db.query('SELECT id FROM "Q_Entity" WHERE id = ?' ,['result']);
+            console.log(res1)
+          
+            //console.log(result1.rows)
+            //res.json(result1.rows)
+       
        // const entityId =  req.params.entityId
        // data.id = entityId
        
