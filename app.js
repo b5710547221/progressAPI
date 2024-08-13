@@ -56,17 +56,17 @@ app.get('/entity/?type=:type', async(req ,res)=>{
     var data;
     try {
         if(type == 100){
-            const result = await db.query("SELECT * FROM mas_department WHERE type='100' ");
+            const result = await db.query("SELECT * FROM Q_Entity WHERE type='100'");
             data = result.rows;
             res.json(result.rows); 
         }
         else if(type == 200){
-            const result = await db.query("SELECT * FROM mas_department WHERE  type='200'");
+            const result = await db.query("SELECT * FROM Q_Entity WHERE  type='200'");
             data = result.rows;
             res.json(result.rows); 
         }
         else{
-            const result = await db.query("SELECT * FROM mas_department");
+            const result = await db.query("SELECT * FROM Q_Entity");
             data = result.rows;
             res.json(result.rows); 
         }
