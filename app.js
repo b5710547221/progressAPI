@@ -66,7 +66,7 @@ app.get('/entity/?type=:type', async(req ,res)=>{
             res.json(result.rows); 
         }
         else{
-            const result = await db.query('SELECT * FROM Q_Entity');
+            const result = await db.query('SELECT * FROM "Q_Entity"');
             data = result.rows;
             res.json(result.rows); 
         }
