@@ -56,17 +56,17 @@ app.get('/entity/?type=:type', async(req ,res)=>{
     var data;
     try {
         if(type == 100){
-            const result = await db.query("SELECT * FROM Q_Entity WHERE type='100'");
+            const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="100"');
             data = result.rows;
             res.json(result.rows); 
         }
         else if(type == 200){
-            const result = await db.query("SELECT * FROM Q_Entity WHERE  type='200'");
+            const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="200"');
             data = result.rows;
             res.json(result.rows); 
         }
         else{
-            const result = await db.query("SELECT * FROM Q_Entity");
+            const result = await db.query('SELECT * FROM Q_Entity');
             data = result.rows;
             res.json(result.rows); 
         }
@@ -76,7 +76,7 @@ app.get('/entity/?type=:type', async(req ,res)=>{
         res.status(500).send("ระบบมีปัญหา")
       }
       //console.log(result.rows)
-    return data;
+    //return data;
 
 });
 app.get('/entity',async(req,res)=>{
@@ -86,7 +86,7 @@ app.get('/entity',async(req,res)=>{
   
     try{
        if(result == null){
-            const result = await db.query('SELECT id FROM "Q_Entity" WHERE id = req.params.entityId');
+            const result = await db.query('SELECT id FROM "Q_Entity" WHERE id = "req.params.entityId"');
             console.log(result.rows)
             res.json(result.rows)
         }else{
