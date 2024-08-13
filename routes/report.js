@@ -15,3 +15,27 @@ router.post('/report/reserved',async(req,res)=>{
    return res.status(200)
     
 });
+
+router.get('/register/:userId?entityId=:entityId',async(req,res)=>{
+    try{
+
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
+    return;
+    
+});
+
+router.post('/register',async(req,res)=>{
+    try{
+        const userId  = req.body.userId
+        const entity = req.body.entity
+    }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+    }
+   
+    
+});
+

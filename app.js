@@ -1,8 +1,11 @@
 var express = require('express');
+
 var bodyParser = require('body-parser');
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const db = require('./config/db');
+const path = require('path');
+
 const options = {
   definition: {
     openapi: "3.1.0",
@@ -10,15 +13,15 @@ const options = {
       title: " Express API with Swagger",
       version: "0.1.0",
       description:
-        "This is a simple CRUD API application made with Express and documented with Swagger",
+        "This is a simple  API application",
       license: {
         name: "MIT",
         url: "https://spdx.org/licenses/MIT.html",
       },
       contact: {
-        name: "LogRocket",
-        url: "https://logrocket.com",
-        email: "info@email.com",
+        name: "Warat",
+        url: "",
+        email: "",
       },
     },
     servers: [
@@ -27,16 +30,17 @@ const options = {
       },
     ],
   },
-  apis: ["./routes/*.js"],
+  apis: ['./app.js'],
 };
 
+
 const specs = swaggerJsdoc(options);
-var users = require('./routes/entity');
-var index = require('./routes/index');
+//var users = require('./routes/entity');
+//var index = require('./routes/index');
 var cors = require('cors')
 const morgan = require('morgan')
 var app = express();
-app.use(require('./routes/index'))
+//app.use(require('./routes/index'))
 
 /* app.get('/', async (req, res) => {
     try {
@@ -175,7 +179,7 @@ app.put('/entity', async(req ,res)=>{
       
 
 });
-router.get('/information/:entityId/:type', async(req ,res)=>{
+app.get('/information/:entityId/:type', async(req ,res)=>{
   try{
       const entityId = req.params.entityId
       const type = req.params.type
@@ -189,7 +193,7 @@ router.get('/information/:entityId/:type', async(req ,res)=>{
 
 
 });
-router.post('/information', async(req ,res)=>{
+app.post('/information', async(req ,res)=>{
   try{
       const entityId = req.params.entityId
       const type = req.params.type
@@ -203,7 +207,7 @@ router.post('/information', async(req ,res)=>{
 
 });
 
-router.get('/server/opentime',async(req,res)=>{
+app.get('/server/opentime',async(req,res)=>{
   try{
  
   }catch(err){
@@ -214,12 +218,12 @@ router.get('/server/opentime',async(req,res)=>{
   return res.status(200)
   
 });
-router.get('/timeslots/:entityId',async(req,res)=>{
+app.get('/timeslots/:entityId',async(req,res)=>{
   return res.status(200)
     
 });
 
-router.get('/timeslots?date=:date',async(req,res)=>{
+app.get('/timeslots?date=:date',async(req,res)=>{
     try{
    
     }catch(err){
@@ -231,7 +235,7 @@ router.get('/timeslots?date=:date',async(req,res)=>{
   });
 
  
-router.get('/timeslots/:entityId/:date',async(req,res)=>{
+app.get('/timeslots/:entityId/:date',async(req,res)=>{
     try{
         const entityId = req.params.entityId
         const date = req.params.date
@@ -244,7 +248,7 @@ router.get('/timeslots/:entityId/:date',async(req,res)=>{
       
   });
  
-router.post('/timeslots',async(req,res)=>{
+app.post('/timeslots',async(req,res)=>{
     try{
         const entityId = req.body.entityId
         const dateList = req.body.date
@@ -258,7 +262,7 @@ router.post('/timeslots',async(req,res)=>{
       
   });
 
-router.put('/timeslots',async(req,res)=>{
+app.put('/timeslots',async(req,res)=>{
     try{
         const entityId = req.body.entityId
         const date = req.body.date
@@ -273,7 +277,7 @@ router.put('/timeslots',async(req,res)=>{
     return res.status(200)
       
   });
-  router.post('/token',async(req,res)=>{
+app.post('/token',async(req,res)=>{
     try{
       const idCardNumber = req.body.idCardNumber
       const entityId = req.body.entityId
@@ -286,7 +290,7 @@ router.put('/timeslots',async(req,res)=>{
     
     return res.status(200)
 });
-router.get('/users/:userId',async(req,res)=>{
+app.get('/users/:userId',async(req,res)=>{
   try{
       const idCardNumber = req.body.idCardNumber
       const entityId = req.body.entityId
@@ -300,7 +304,7 @@ return res.status(200),
        entityId
 });
 
-router.post('/users',async(req,res)=>{
+app.post('/users',async(req,res)=>{
   try{
       const  uid  = req.body.uid
     }catch(err){
@@ -311,7 +315,7 @@ router.post('/users',async(req,res)=>{
   return res.status(200)
 });
 
-router.put('/users',async(req,res)=>{
+app.put('/users',async(req,res)=>{
   try{
       const  userId  = req.body.uid
       const key_to_update = req.body.key_to_update
@@ -330,8 +334,9 @@ app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(specs, { explorer: true })
+ 
 );
-
+//swagger(app)
 app.listen(3000, () => console.log('server run listening on port 3000'));
 
 
