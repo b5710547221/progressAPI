@@ -79,16 +79,18 @@ app.get('/entity/?type=:type', async(req ,res)=>{
     //return data;
 
 });
-app.get('/entity',async(req,res)=>{
+app.get('/entity/:entityId',async(req,res)=>{
   //var data = await db.query('SELECT id FROM "Q_Entity"'); 
   //console.log(data.rows.id)
   //res.json(data.rows);  
-  
+    
+    var result = null
     try{
        if(result == null){
-            const result = await db.query('SELECT id FROM "Q_Entity" WHERE id = "req.params.entityId"');
-            console.log(result.rows)
-            res.json(result.rows)
+            result = req.params.entityId
+            const result1 = await db.query('SELECT id FROM "Q_Entity" WHERE id = result');
+            console.log(result1.rows)
+            res.json(result1.rows)
         }else{
             res.send("ไม่มีข้อมูล")
         }
