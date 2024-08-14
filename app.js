@@ -51,7 +51,7 @@ var app = express();
       res.status(500).send('Internal Server Error');
     }
   }); */
-app.get('/entity/?type=:type', async(req ,res)=>{
+app.get('/entity/?type=:type',cors(),async(req ,res)=>{
     var type =  req.query.type
     var data;
     try {
@@ -60,8 +60,23 @@ app.get('/entity/?type=:type', async(req ,res)=>{
             data = result.rows;
             res.json(result.rows); 
         }
-        else if(type == 200){
-            const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="200"');
+          else if(type == 200){
+              const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="200"');
+              data = result.rows;
+              res.json(result.rows); 
+          }
+          else if(type == 200){
+            const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="300"');
+            data = result.rows;
+            res.json(result.rows); 
+        }
+          else if(type == 400){
+            const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="400"');
+            data = result.rows;
+            res.json(result.rows); 
+        }
+          else if(type == 500){
+            const result = await db.query('SELECT * FROM "Q_Entity" WHERE  type="500"');
             data = result.rows;
             res.json(result.rows); 
         }
@@ -78,26 +93,55 @@ app.get('/entity/?type=:type', async(req ,res)=>{
     //return data;
 
 });
-app.get('/entity/:entityId',cors(),async(req,res)=>{
-  //var data = await db.query('SELECT id FROM "Q_Entity"'); 
-  //console.log(data.rows.id)
-  //res.json(data.rows);  
-      var entityId = req.params.entityId;
+app.get('/entity',cors(),async(req ,res)=>{
+  var type =  req.query.type
+  var data;
+  try {
+      
+          const result = await db.query('SELECT * FROM "Q_Entity"');
+          res.json(result.rows); 
+      
+      //console.log(result)
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("ระบบมีปัญหา")
+    }
+    //console.log(result.rows)
+  //return data;
 
-     
-   // var result = null
+});
+app.get('/entity/:entityId',cors(),async(req,res)=>{
     try{
-            let res1;
+            //let res1;
             var result = req.params.entityId
-            res1 = await db.query('SELECT id FROM "Q_Entity" WHERE id = ?' ,['result']);
-            console.log(res1)
-          
-            //console.log(result1.rows)
-            //res.json(result1.rows)
-       
-       // const entityId =  req.params.entityId
-       // data.id = entityId
-       
+            
+            //res1 = await db.query('SELECT id FROM "Q_Entity" WHERE id = ?' , req.params.entityId);
+            //console.log(res1)
+
+            const text = 'SELECT id FROM "Q_Entity" WHERE id  = $1'
+            const values = [result]
+            
+            const res1 = await db.query(text, values)
+            console.log(res1.rows)
+            res.json(res1.rows)
+      }catch(err){
+        console.log(err)
+        res.status(500).send("ระบบมีปัญหา")
+      }
+     
+   //  return data  
+      
+});
+app.get('/entity/all/:entityId',cors(),async(req,res)=>{
+ 
+    try{
+            var result = req.params.entityId
+            const text = 'SELECT * FROM "Q_Entity" WHERE id  = $1'
+            const values = [result]
+            
+            const res1 = await db.query(text, values)
+            console.log(res1.rows)
+            res.json(res1.rows)
 
       }catch(err){
         console.log(err)
@@ -138,7 +182,7 @@ app.post('/entity',async(req,res)=>{
     
     try{
 
-      data.entityId = entityId
+      /* data.entityId = entityId
       data.image = image
       data.organization =organization
       data.mass_department_id =mass_department_id
@@ -163,8 +207,14 @@ app.post('/entity',async(req,res)=>{
       data.created_at=created_at
       data.created_by=created_by
       data.updated_at=updated_at
-      data.updated_by=updated_by
-
+      data.updated_by=updated_by */
+          var result = req.params.entityId
+          const text = 'INSERT INTO "Q_Entity" ( entityId, image , organization, mass_department_id ,) VALUES (101, 50.00, '123 Main Street');'
+          const values = [result]
+          
+          const res1 = await db.query(text, values)
+          console.log(res1.rows)
+          res.json(res1.rows)
       }catch(err){
         console.log(err)
         res.status(500).send("ระบบมีปัญหา")
@@ -175,31 +225,35 @@ app.post('/entity',async(req,res)=>{
 });
 app.put('/entity', async(req ,res)=>{
       const data = null;
-
-      
-
-   
-      
-
 });
-app.get('/information/:entityId/:type', async(req ,res)=>{
+app.get('/information/:entityId', async(req ,res)=>{
   try{
       const entityId = req.params.entityId
-      const type = req.params.type
+      const type = req.body.type
       const hash_key = `${entityId}:${type}`
+      res.json(hash_key)
   }catch(err){
       console.log(err)
       res.status(500).send("ระบบมีปํญหา")
   }
  
-  return  entityId,type
+  return  entityId,type,"บันทึกสำเร็จ"
 
 
 });
 app.post('/information', async(req ,res)=>{
   try{
-      const entityId = req.params.entityId
-      const type = req.params.type
+      const entityId = req.body.entityId
+      const type = req.body.type
+      const text1 = req.body.text
+
+      const text = 'INSERT INTO "Q_Entity" ( entityId, image , organization ) VALUES (101, 50.00, '123 Main Street');'
+      const values = [result]
+      
+      const res1 = await db.query(text, values)
+      console.log(res1.rows)
+      res.json(res1.rows)
+
   }catch(err){
       console.log(err)
       res.status(500).send("ระบบมีปัญหา")
