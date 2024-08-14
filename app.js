@@ -208,9 +208,9 @@ app.post('/entity',async(req,res)=>{
       data.created_by=created_by
       data.updated_at=updated_at
       data.updated_by=updated_by */
-          var result = req.params.entityId
-          const text = 'INSERT INTO "Q_Entity" ( entityId, image , organization, mass_department_id ,) VALUES (101, 50.00, '123 Main Street');'
-          const values = [result]
+         /*  var result = req.params.entityId
+          const text = 'INSERT INTO "Q_Entity" ( entityId, image , organization, mass_department_id ,) VALUES ($1, $2, $3);'
+          const values = [result] */
           
           const res1 = await db.query(text, values)
           console.log(res1.rows)
@@ -247,8 +247,8 @@ app.post('/information', async(req ,res)=>{
       const type = req.body.type
       const text1 = req.body.text
 
-      const text = 'INSERT INTO "Q_Entity" ( entityId, image , organization ) VALUES (101, 50.00, '123 Main Street');'
-      const values = [result]
+      const text = 'INSERT INTO "Q_Entity" ( id, type , type_description ) VALUES  ($1, $2, $3);'
+      const values = [entityId,type,text1]
       
       const res1 = await db.query(text, values)
       console.log(res1.rows)
